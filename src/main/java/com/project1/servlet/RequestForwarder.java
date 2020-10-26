@@ -12,10 +12,10 @@ public class RequestForwarder {
 		try {
 			switch(req.getRequestURI()) {
 			case "/Project1-0.0.1-SNAPSHOT/test.page":
-				req.getRequestDispatcher("test.html").forward(req, resp);
+				req.getRequestDispatcher("html/test.html").forward(req, resp);
 				break;
 			default:
-				req.getRequestDispatcher("/index.html").forward(req, resp);
+				req.getRequestDispatcher("html/index.html").forward(req, resp);
 			}	
 		}catch(ServletException | IOException e) {
 			e.printStackTrace();
