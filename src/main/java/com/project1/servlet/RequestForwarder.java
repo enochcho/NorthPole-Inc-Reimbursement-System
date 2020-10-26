@@ -11,7 +11,7 @@ public class RequestForwarder {
 	public void routes (HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			switch(req.getRequestURI()) {
-			case "Project1/test.page":
+			case "/Project1/test.page":
 				req.getRequestDispatcher("html/test.html").forward(req, resp);
 				break;
 			default:
