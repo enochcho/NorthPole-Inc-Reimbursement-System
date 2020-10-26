@@ -11,11 +11,11 @@ public class RequestForwarder {
 	public void routes (HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			switch(req.getRequestURI()) {
-			case "/Project1/test.page":
-				req.getRequestDispatcher("/Project1/test.html").forward(req, resp);
+			case "/Project1-0.0.1-SNAPSHOT/test.page":
+				req.getRequestDispatcher("/Project1-0.0.1-SNAPSHOT/test.html").forward(req, resp);
 				break;
 			default:
-				req.getRequestDispatcher("/Project1/index.html").forward(req, resp);
+				req.getRequestDispatcher("/Project1-0.0.1-SNAPSHOT/index.html").forward(req, resp);
 			}	
 		}catch(ServletException | IOException e) {
 			e.printStackTrace();
