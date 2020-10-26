@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 public class TestServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		new RequestForwarder().data(req,resp);
+		new RequestForwarder().routes(req,resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		new RequestForwarder().data(req, resp);
+		new RequestForwarder().routes(req, resp);
 	}
 }
