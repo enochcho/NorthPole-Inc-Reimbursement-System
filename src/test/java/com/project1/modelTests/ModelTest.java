@@ -1,7 +1,8 @@
-package com.project1.test;
+package com.project1.modelTests;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -55,7 +56,7 @@ public class ModelTest {
 	
 	@Test
 	public void testReimbursement() {
-		assertEquals(reimb.getAmount(), 100, 0);
+		assertEquals(100, reimb.getAmount(), 0);
 	}
 
 }

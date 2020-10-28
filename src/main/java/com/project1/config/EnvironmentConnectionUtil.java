@@ -13,9 +13,12 @@ import org.apache.log4j.Logger;
 public class EnvironmentConnectionUtil {
 	//final static Logger log = Logger.getLogger("EnvironmentConnectionUtil"); //currentSchema is optional,, default is public
 	//url for jdbc -> jdbc:postgresql://endpoint:port/dbName?currentSchema=schema
-	private final String url=System.getenv("url");
-	private final String username =System.getenv("username");
-	private final String password = System.getenv("password");
+//	private final String url=System.getenv("url");
+//	private final String username =System.getenv("username");
+//	private final String password = System.getenv("password");
+	private final String url="jdbc:postgresql://mydb1.ctqn1wf3ao57.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=project1schema";
+	private final String username ="jdbc_user";
+	private final String password = "wasspord";
 	private static EnvironmentConnectionUtil instance;
 	private EnvironmentConnectionUtil() {
 		

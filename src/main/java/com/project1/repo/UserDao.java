@@ -1,5 +1,6 @@
 package com.project1.repo;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,6 +96,25 @@ public class UserDao implements DaoContract<User,Integer>{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, i);
 			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int login(String username, String password) {
+		int result = 0;
+		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){
+			String sql = "call login(?,?,0)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.setString(1,  username);
+			cs.setString(2,  password);
+			ResultSet rs = cs.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			rs.close();
+			cs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
