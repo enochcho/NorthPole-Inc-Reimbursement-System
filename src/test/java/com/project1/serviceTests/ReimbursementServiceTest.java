@@ -45,15 +45,15 @@ public class ReimbursementServiceTest {
 	 * This method returns either a 0, or the id of the reimbursement
 	 * that was just created. 
 	 */
-	@Test
-	public void testSubmitRequest() {
-		UserRole role = new UserRole(2);
-		ReimbursementType type = new ReimbursementType(1);
-		ReimbursementStatus status = new ReimbursementStatus(1);
-		User santa = new User(3,"santa", "djd", "dd", "ddd", role);
-		Reimbursement r = new Reimbursement(0, 100, null, "this is a test insert", null, santa, status, type);
-		assertNotEquals(rs.submitRequest(r), 0, 0);
-	}
+//	@Test
+//	public void testSubmitRequest() {
+//		UserRole role = new UserRole(2);
+//		ReimbursementType type = new ReimbursementType(1);
+//		ReimbursementStatus status = new ReimbursementStatus(1);
+//		User santa = new User(3,"santa", "djd", "dd", "ddd", role);
+//		Reimbursement r = new Reimbursement(0, 100, null, "this is a test insert", null, santa, status, type);
+//		assertNotEquals(rs.submitRequest(r), 0, 0);
+//	}
 	
 	/**
 	 * A financial manager can approve or deny a request

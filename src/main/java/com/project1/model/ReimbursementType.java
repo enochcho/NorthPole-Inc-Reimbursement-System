@@ -2,10 +2,12 @@ package com.project1.model;
 
 public class ReimbursementType {
 	private int type;
+	private String str;
 
 	public ReimbursementType(int type) {
 		if(validate(type)) {
-			this.type = type;			
+			this.type = type;
+			setStr();
 		} else {
 			throw new IllegalArgumentException(type + " is not a valid reimbursement type!");
 		}
@@ -42,6 +44,22 @@ public class ReimbursementType {
 	
 	public boolean validate(int id) {
 		return (id > 0 && id < 5); 
+	}
+	
+	
+	private void setStr() {
+		switch(type) {
+		case 1:
+			str = "Lodging";
+		case 2:
+			str = "Travel";
+		case 3:
+			str = "Food";
+		case 4:
+			str = "Other";
+		default:
+			str = "Something is wrong with the type";
+		}
 	}
 	
 	
