@@ -34,6 +34,12 @@ public class RequestForwarder {
 			System.out.println("all.json");
 			new ReimbursementController().getAll(resp);
 			break;
+		case "/Project1/add.json":
+			new ReimbursementController().add(req,resp);
+			break;
+		case "/Project1/aprvdeny.json":
+			new ReimbursementController().add(req,resp);
+			break;
 		}
 	}
 }

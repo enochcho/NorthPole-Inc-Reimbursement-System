@@ -51,7 +51,7 @@ public class ReimbursementServiceTest {
 //		ReimbursementType type = new ReimbursementType(1);
 //		ReimbursementStatus status = new ReimbursementStatus(1);
 //		User santa = new User(3,"santa", "djd", "dd", "ddd", role);
-//		Reimbursement r = new Reimbursement(0, 100, null, "this is a test insert", null, santa, status, type);
+//		Reimbursement r = new Reimbursement(0, 100, new Date(), "this is a test insert", null, santa, status, type);
 //		assertNotEquals(rs.submitRequest(r), 0, 0);
 //	}
 	

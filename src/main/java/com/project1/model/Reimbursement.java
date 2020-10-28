@@ -1,11 +1,11 @@
 package com.project1.model;
 
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /*
  * You can create Timestamp with Timestamp.from(Instant.now());
+ * converted to date instead to work with js. 
  * InputStream is converted to byte[] with inputstream.readAllBytes() method. 
  * You can convert a file into a inputstream by uploading as a FileItem and using the 
  * FileItem.getInputStream() method. 
@@ -14,8 +14,8 @@ import java.sql.Timestamp;
 public class Reimbursement {
 	private int id;
 	private double amount;
-	private Timestamp submitTime;
-	private Timestamp resolveTime;
+	private Date submitTime;
+	private Date resolveTime;
 	private String description;
 	private InputStream receipt;
 	private User author;
@@ -24,7 +24,7 @@ public class Reimbursement {
 	private ReimbursementType type;
 	
 	
-	public Reimbursement(int id, double amount, Timestamp submitTime, Timestamp resolveTime, String description,
+	public Reimbursement(int id, double amount, Date submitTime, Date resolveTime, String description,
 			InputStream receipt, User author, User resolver, ReimbursementStatus status, ReimbursementType type) {
 		this.id = id;
 		this.amount = amount;
@@ -39,8 +39,12 @@ public class Reimbursement {
 	}
 	
 	//use this for creating reimbursements that have just been submitted
-	public Reimbursement (int id, double amount, Timestamp submitTime, String description, InputStream receipt, User author, ReimbursementStatus status, ReimbursementType type) {
+	public Reimbursement (int id, double amount, Date submitTime, String description, InputStream receipt, User author, ReimbursementStatus status, ReimbursementType type) {
 		this(id, amount, submitTime, null, description, receipt, author, null, status, type);
+	}
+	
+	public Reimbursement() {
+		super();
 	}
 
 	public int getId() {
@@ -51,11 +55,11 @@ public class Reimbursement {
 		return amount;
 	}
 
-	public Timestamp getSubmitTime() {
+	public Date getSubmitTime() {
 		return submitTime;
 	}
 
-	public Timestamp getResolveTime() {
+	public Date getResolveTime() {
 		return resolveTime;
 	}
 
@@ -87,11 +91,11 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 
-	public void setSubmitTime(Timestamp submitTime) {
+	public void setSubmitTime(Date submitTime) {
 		this.submitTime = submitTime;
 	}
 
-	public void setResolveTime(Timestamp resolveTime) {
+	public void setResolveTime(Date resolveTime) {
 		this.resolveTime = resolveTime;
 	}
 

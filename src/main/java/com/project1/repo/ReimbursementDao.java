@@ -120,8 +120,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 						+ "reimb_type_id = ? where reimb_id = ?;";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setDouble(1, t.getAmount());
-				ps.setTimestamp(2, t.getSubmitTime());
-				ps.setTimestamp(3, t.getResolveTime());
+				ps.setTimestamp(2, (Timestamp) t.getSubmitTime());
+				ps.setTimestamp(3, (Timestamp) t.getResolveTime());
 				ps.setString(4,t.getDescription());
 				ps.setBytes(5, IOUtils.toByteArray(t.getReceipt()));
 				ps.setInt(6,t.getAuthor().getUserId());
@@ -143,8 +143,8 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 						+ "reimb_type_id = ? where reimb_id = ?;";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setDouble(1, t.getAmount());
-				ps.setTimestamp(2, t.getSubmitTime());
-				ps.setTimestamp(3, t.getResolveTime());
+				ps.setTimestamp(2, (Timestamp) t.getSubmitTime());
+				ps.setTimestamp(3, (Timestamp) t.getResolveTime());
 				ps.setString(4,t.getDescription());
 				if(t.getReceipt() != null) {
 					ps.setBytes(5, IOUtils.toByteArray(t.getReceipt()));	
@@ -250,6 +250,7 @@ public class ReimbursementDao implements DaoContract<Reimbursement, Integer>{
 
 	/*
 	 * called when the financial manager approves/denies the request
+	 * returns 1 if it was successfully updated
 	 */
 	public int updateStatus(Reimbursement r) {
 		int result = 0;

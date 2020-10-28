@@ -7,12 +7,30 @@ public class ReimbursementStatus {
 	public ReimbursementStatus(int status) {
 		if(validate(status)) {
 			this.status = status;
-			setStr(status);
+			switch(status) {
+			case 1:
+				this.str =  "Pending";
+				break;
+			case 2:
+				this.str = "Approved";
+				break;
+			case 3:
+				this.str =  "Denied";
+				break;
+			default:
+				this.str = "something is wrong";
+				break;
+			}
+			
 		} else {
 			throw new IllegalArgumentException(status + " is not a valid reimbursement status!");
 		}
 	}
 	
+	public ReimbursementStatus() {
+		super();
+	}
+
 	public int getStatusId() {
 		return status;
 	}
@@ -55,6 +73,9 @@ public class ReimbursementStatus {
 		default:
 			this.str = "something is wrong";
 		}
+	}
+	public String getStr() {
+		return this.str;
 	}
 	
 	

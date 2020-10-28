@@ -16,6 +16,10 @@ public class User {
 		this.email =email;
 		this.role = role;
 	}
+	
+	public User() {
+		super();
+	}
 
 	public String getUsername() {
 		return username;

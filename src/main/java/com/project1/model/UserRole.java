@@ -1,6 +1,10 @@
 package com.project1.model;
 
 public class UserRole {
+	public UserRole() {
+		super();
+	}
+
 	private int role;
 	
 	//1 is financial manager
