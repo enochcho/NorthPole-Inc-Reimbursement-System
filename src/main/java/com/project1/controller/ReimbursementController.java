@@ -19,17 +19,18 @@ public class ReimbursementController {
 
 	public void getAll(HttpServletResponse resp) {
 		resp.setContentType("text/json");
-		
-	}
-
-	public void getEmData(HttpServletResponse resp) {
-		resp.setContentType("text/json");
 		List<Reimbursement> reimbs = rs.findAll();
+		System.out.println(reimbs);
 		try {
 			resp.getWriter().println(new ObjectMapper().writeValueAsString(reimbs));
 		} catch(IOException e) {
 			e.printStackTrace();			
 		}
+		
+	}
+
+	public void getEmData(HttpServletResponse resp) {
+		resp.setContentType("text/json");
 	}
 
 }

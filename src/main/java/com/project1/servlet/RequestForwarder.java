@@ -31,6 +31,7 @@ public class RequestForwarder {
 			new ReimbursementController().getEmData(resp);
 			break;
 		case "/Project1/all.json":
+			System.out.println("all.json");
 			new ReimbursementController().getAll(resp);
 			break;
 		}

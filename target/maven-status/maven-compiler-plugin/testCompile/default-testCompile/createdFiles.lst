@@ -1,1 +1,5 @@
-com\project1\test\ModelTest.class
+com\project1\servletTests\JsonServletTest.class
+com\project1\modelTests\ModelTest.class
+com\project1\serviceTests\UserServiceTest.class
+com\project1\controllerTests\ReimbursementControllerTest.class
+com\project1\serviceTests\ReimbursementServiceTest.class
