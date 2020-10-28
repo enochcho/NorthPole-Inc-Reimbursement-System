@@ -20,7 +20,7 @@ public class UserDao implements DaoContract<User,Integer>{
 
 	@Override
 	public List<User> findAll() {
-		List<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<>();
 		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){
 			String sql = "select * from ers_users;";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -28,6 +28,8 @@ public class UserDao implements DaoContract<User,Integer>{
 			while(rs.next()) {
 				users.add(new User(rs.getInt(1),rs.getString(2), rs.getString(4), rs.getString(5),rs.getString(6),new UserRole(rs.getInt(7))));
 			}
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -45,6 +47,8 @@ public class UserDao implements DaoContract<User,Integer>{
 			if(rs.next()) {
 				user = new User(rs.getInt(1),rs.getString(2), rs.getString(4), rs.getString(5),rs.getString(6),new UserRole(rs.getInt(7)));
 			}
+			rs.close();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -64,6 +68,7 @@ public class UserDao implements DaoContract<User,Integer>{
 			ps.setInt(5, t.getRole().getTypeId());
 			ps.setInt(6, t.getUserId());
 			result = ps.executeUpdate();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,6 +87,7 @@ public class UserDao implements DaoContract<User,Integer>{
 			ps.setString(4, t.getEmail());
 			ps.setInt(5, t.getRole().getTypeId());
 			result = ps.executeUpdate();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -96,6 +102,7 @@ public class UserDao implements DaoContract<User,Integer>{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, i);
 			result = ps.executeUpdate();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -12,7 +12,7 @@ public class UserService {
 	}
 	
 	
-	//hash password in controller. 
+	//hash password in database
 	//returns role_id: 1 if Financial Manager, 2 if Employee OR returns 0 if login failed. 
 	public int login(String username, String password) {
 		return ud.login(username, password);

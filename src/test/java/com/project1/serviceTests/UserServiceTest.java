@@ -25,7 +25,7 @@ public class UserServiceTest {
 /**
  * For login tests
  * 		Check with a select statement to see if the username and password matches
- * 		Return the role_id if it matches, otherwise return -1.
+ * 		Return the role_id if it matches, otherwise return 0.
  * 			-- role_id: 1 is Financial Manager, 2 is Employee
  * 		create a session with the username and role_id. 
  */
