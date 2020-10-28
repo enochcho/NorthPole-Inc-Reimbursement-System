@@ -36,6 +36,12 @@ public class EnvironmentConnectionUtil {
 	
 	//to create a connection to the db
 	public Connection getConnection() throws SQLException{
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return DriverManager.getConnection(url,username,password);
 	}
 	
