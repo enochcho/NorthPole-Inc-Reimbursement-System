@@ -39,5 +39,5 @@ async function asyncFetch(url){
     }
 }
 
-//asyncFetch("http://52.87.233.199:8081/Project1/all.json");
-asyncFetch("http://localhost:8080/Project1/all.json");
+asyncFetch("http://52.87.233.199:8081/Project1/all.json");
+//asyncFetch("http://localhost:8080/Project1/all.json");
