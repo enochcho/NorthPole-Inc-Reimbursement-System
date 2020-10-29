@@ -65,7 +65,7 @@ public class UserDao implements DaoContract<User,Integer>{
 			ps.setString(2, t.getFirst());
 			ps.setString(3,  t.getLast());
 			ps.setString(4, t.getEmail());
-			ps.setInt(5, t.getRole().getTypeId());
+			ps.setInt(5, t.getRole().getRoleId());
 			ps.setInt(6, t.getUserId());
 			result = ps.executeUpdate();
 			ps.close();
@@ -85,7 +85,7 @@ public class UserDao implements DaoContract<User,Integer>{
 			ps.setString(2, t.getFirst());
 			ps.setString(3,  t.getLast());
 			ps.setString(4, t.getEmail());
-			ps.setInt(5, t.getRole().getTypeId());
+			ps.setInt(5, t.getRole().getRoleId());
 			result = ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
@@ -109,6 +109,12 @@ public class UserDao implements DaoContract<User,Integer>{
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return userid  or 0 if unsuccessful login
+	 */
 	public int login(String username, String password) {
 		int result = 0;
 		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){

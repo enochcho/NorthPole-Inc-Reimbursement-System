@@ -2,9 +2,10 @@ package com.project1.serviceTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,14 +15,18 @@ import com.project1.model.ReimbursementStatus;
 import com.project1.model.ReimbursementType;
 import com.project1.model.User;
 import com.project1.model.UserRole;
+import com.project1.repo.ReimbursementDao;
 import com.project1.service.ReimbursementService;
 
 public class ReimbursementServiceTest {
 	
 	private ReimbursementService rs;
+	private ReimbursementDao rd;
 	@Before
 	public void setup() {
+		rd = mock(ReimbursementDao.class);
 		rs = new ReimbursementService();
+		
 	}
 	
 	/**
@@ -47,12 +52,18 @@ public class ReimbursementServiceTest {
 	 */
 //	@Test
 //	public void testSubmitRequest() {
-//		UserRole role = new UserRole(2);
-//		ReimbursementType type = new ReimbursementType(1);
-//		ReimbursementStatus status = new ReimbursementStatus(1);
-//		User santa = new User(3,"santa", "djd", "dd", "ddd", role);
-//		Reimbursement r = new Reimbursement(0, 100, new Date(), "this is a test insert", null, santa, status, type);
-//		assertNotEquals(rs.submitRequest(r), 0, 0);
+////		UserRole role = new UserRole(2);
+////		ReimbursementType type = new ReimbursementType(1);
+////		ReimbursementStatus status = new ReimbursementStatus(1);
+////		User santa = new User(3,"santa", "djd", "dd", "ddd", role);
+////		Reimbursement r = new Reimbursement(0, 100, new Date(), "this is a test insert", null, santa, status, type);
+////		when(rd.create((Reimbursement) any(Reimbursement.class))).thenAnswer(i -> {
+////			return 1;
+////		});
+////		
+////		assertEquals(1,rd.create(r));
+//		
+//		//assertNotEquals(rs.submitRequest(r), 0, 0);
 //	}
 	
 	/**

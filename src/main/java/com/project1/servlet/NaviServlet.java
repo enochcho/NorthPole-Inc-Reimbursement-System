@@ -18,6 +18,7 @@ public class NaviServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Post request in Navi");
 		new RequestForwarder().routes(req, resp);
 	}
 }

@@ -34,8 +34,8 @@ public class ReimbursementService {
 	 * 
 	 * need to replace author only the id is real, the rest is bogus
 	 */
-	public int submitRequest(Reimbursement r) {
-		r.setAuthor(ud.findById(r.getAuthor().getUserId()));
+	public int submitRequest(Reimbursement r, int i) {
+		r.setAuthor(ud.findById(i));
 		return rd.create(r);
 	}
 
@@ -54,7 +54,6 @@ public class ReimbursementService {
 		toChange.setResolver(finMan);
 		//set the status type depending on the boolean: 2 is approved, 3 is denied.
 		int status = approved ? 2:3;
-		System.out.println(status);
 		toChange.getStatus().setStatusId(status);
 		//resolve time will be added in the db
 		return rd.updateStatus(toChange);

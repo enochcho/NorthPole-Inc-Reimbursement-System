@@ -1,6 +1,7 @@
 package com.project1.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,14 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project1.model.Reimbursement;
+import com.project1.model.User;
 import com.project1.service.ReimbursementService;
 
 public class ReimbursementController {
 	private ReimbursementService rs;
+	private SessionController sc;
+	
+	public ReimbursementController(ReimbursementService rs, SessionController sc) {
+		this.rs = rs;
+		this.sc = sc;
+	}
 	
 	public ReimbursementController() {
-		super();
-		rs = new ReimbursementService();
+		this(new ReimbursementService(), new SessionController());
 	}
 
 	/**
@@ -36,7 +43,6 @@ public class ReimbursementController {
 //		
 //		List<Reimbursement> reimbs = new ArrayList<>();
 //		reimbs.add(r);
-		System.out.println(reimbs);
 		try {
 			resp.getWriter().println(new ObjectMapper().writeValueAsString(reimbs));
 		} catch(IOException e) {
@@ -47,11 +53,18 @@ public class ReimbursementController {
 
 	/**
 	 * used by employees
+	 * @param req 
 	 * @param resp
 	 * sends a json of an employee's reimbursements
 	 */
-	public void getEmData(HttpServletResponse resp) {
+	public void getEmData(HttpServletRequest req, HttpServletResponse resp) {
 		resp.setContentType("text/json");
+		List<Reimbursement> reimbs = rs.viewMyTickets(sc.getSessionUser(req).getUserId());
+		try {
+			resp.getWriter().println(new ObjectMapper().writeValueAsString(reimbs));
+		} catch(IOException e) {
+			e.printStackTrace();			
+		}
 	}
 
 	/**
@@ -63,11 +76,11 @@ public class ReimbursementController {
 	public void add(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			Reimbursement r = new ObjectMapper().readValue(req.getInputStream(), Reimbursement.class);
-			int x = rs.submitRequest(r);
+			int x = rs.submitRequest(r,sc.getSessionUser(req).getUserId());
 			if(x ==1) {
-				resp.getWriter().println("The reimbursement was added");
+				resp.getWriter().println(new ObjectMapper().writeValueAsString("The reimbursement was added"));
 			} else {
-				resp.getWriter().println("The reimbursement was not added");
+				resp.getWriter().println(new ObjectMapper().writeValueAsString("The reimbursement was NOT added"));
 			}
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -82,15 +95,17 @@ public class ReimbursementController {
 	 */
 	public void approveDeny(HttpServletRequest req, HttpServletResponse resp) {
 		try {
+			System.out.println("In the reimbursement controller " + sc.getSessionUser(req).getUsername());
+			resp.setContentType("text/json");
 			JsonNode jsonNode = new ObjectMapper().readTree(req.getInputStream());
-			int approverId = jsonNode.get("approverId").asInt();
 			int reimbId = jsonNode.get("reimbId").asInt();
 			boolean approved = jsonNode.get("approved").asBoolean();
-			int x = rs.approveDeny(approverId, reimbId, approved);
+			User approver = sc.getSessionUser(req);
+			int x = rs.approveDeny(approver.getUserId(), reimbId, approved);
 			if(x == 1) {
-				resp.getWriter().println("The reimbursement was approved/denied");
+				resp.getWriter().println(new ObjectMapper().writeValueAsString("The reimbursement was approved/denied"));
 			} else {
-				resp.getWriter().println("The reimbursement was not approved/denied");
+				resp.getWriter().println(new ObjectMapper().writeValueAsString("The reimbursement wasn't approved or denied"));
 			}
 		}catch (IOException e) {
 			e.printStackTrace();

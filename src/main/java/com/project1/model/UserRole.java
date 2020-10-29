@@ -17,11 +17,11 @@ public class UserRole {
 		}
 	}
 	
-	public int getTypeId() {
+	public int getRoleId() {
 		return role;
 	}
 	
-	public boolean setTypeId(int id) {
+	public boolean setRoleId(int id) {
 		if(validate(id)) {
 			this.role = id;
 			return true;
