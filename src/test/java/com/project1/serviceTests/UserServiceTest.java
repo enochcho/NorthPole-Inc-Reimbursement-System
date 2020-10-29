@@ -1,6 +1,10 @@
 package com.project1.serviceTests;
 
+
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,21 +37,21 @@ public class UserServiceTest {
 	public void testLoginSuccess() {
 		String username = "santa";
 		String password = "christmas";
-		assertEquals(2,us.login(username, password),0);
+		assertEquals(username,us.login(username, password).getUsername());
 	}
 	
 	@Test
 	public void testLoginSucess2() {
-		String username = "Mrs.Claus";
+		String username = "mrsclaus";
 		String password = "christmas";
-		assertEquals(1,us.login(username, password),0);
+		assertEquals(username,us.login(username, password).getUsername());
 	}
 	
 	@Test 
 	public void testLoginFail() {
 		String username = "Dan";
 		String password = "Hacker";
-		assertEquals(0,us.login(username, password),0);
+		assertNull(us.login(username, password));
 	}
 	
 }

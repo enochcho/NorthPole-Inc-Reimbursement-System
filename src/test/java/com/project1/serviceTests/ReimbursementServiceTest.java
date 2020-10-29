@@ -30,11 +30,11 @@ public class ReimbursementServiceTest {
 	}
 	
 	/**
-	 * This tests the number of reimbursements returned
+	 * This tests the number of reimbursements returned, make sure its not 0
 	 */
 	@Test 
 	public void testViewMyTickets() {
-		assertEquals(rs.viewMyTickets(2).size(), 1,0);
+		assertNotEquals(rs.viewMyTickets(2).size(), 0);
 	}
 	
 	/**

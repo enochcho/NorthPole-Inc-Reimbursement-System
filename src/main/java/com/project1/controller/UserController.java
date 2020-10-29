@@ -66,6 +66,12 @@ public class UserController {
 		JsonNode jsonNode;
 		try {
 			User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
+			int x = us.register(user);
+			if(x == 1) {
+				resp.getWriter().println(new ObjectMapper().writeValueAsString("You registered successfully! Please login"));
+			} else {
+				resp.getWriter().println(new ObjectMapper().writeValueAsString("Your registration was unsuccessful, please try again"));
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
