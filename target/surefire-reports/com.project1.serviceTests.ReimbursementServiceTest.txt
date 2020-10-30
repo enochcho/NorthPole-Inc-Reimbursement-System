@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.project1.serviceTests.ReimbursementServiceTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.963 sec
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.459 sec

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRole.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project1</a> &gt; <a href="index.source.html" class="el_package">com.project1.model</a> &gt; <span class="el_source">UserRole.java</span></div><h1>UserRole.java</h1><pre class="source lang-java linenums">package com.project1.model;
+
+public class UserRole {
+	public UserRole() {
+<span class="nc" id="L5">		super();</span>
+<span class="nc" id="L6">	}</span>
+
+	private int role;
+	
+	//1 is financial manager
+	//2 is employee
+<span class="fc" id="L12">	public UserRole(int role) {</span>
+<span class="pc bpc" id="L13" title="1 of 2 branches missed.">		if(validate(role)) {</span>
+<span class="fc" id="L14">			this.role = role;			</span>
+		} else {
+<span class="nc" id="L16">			throw new IllegalArgumentException(role + &quot; is not a valid user role!&quot;);</span>
+		}
+<span class="fc" id="L18">	}</span>
+	
+	public int getRoleId() {
+<span class="nc" id="L21">		return role;</span>
+	}
+	
+	public boolean setRoleId(int id) {
+<span class="nc bnc" id="L25" title="All 2 branches missed.">		if(validate(id)) {</span>
+<span class="nc" id="L26">			this.role = id;</span>
+<span class="nc" id="L27">			return true;</span>
+		} else {
+<span class="nc" id="L29">			return false;</span>
+		}
+	}
+	
+	@Override
+	public String toString() {
+<span class="nc bnc" id="L35" title="All 3 branches missed.">		switch(role) {</span>
+		case 1:
+<span class="nc" id="L37">			return &quot;Financial Manager&quot;;</span>
+		case 2:
+<span class="nc" id="L39">			return &quot;Employee&quot;;</span>
+		default:
+<span class="nc" id="L41">			return &quot;Something is wrong with the role&quot;;</span>
+		}
+	}
+	
+	public boolean validate(int id) {
+<span class="pc bpc" id="L46" title="2 of 4 branches missed.">		return (id &gt; 0 &amp;&amp; id &lt; 3); </span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -13,7 +13,9 @@ public class ReimbursementService {
 	private UserDao ud;
 	
 	public ReimbursementService() {
-		super();
+		this(new ReimbursementDao(), new UserDao());
+	}
+	public ReimbursementService(ReimbursementDao rd, UserDao ud) {
 		this.rd = new ReimbursementDao();
 		this.ud = new UserDao();
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="com.project1.controllerTests.ReimbursementControllerTest" time="0.13" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.project1.controllerTests.ReimbursementControllerTest" time="3.149" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_261\jre\bin"/>
@@ -63,7 +63,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.project1.controllerTests.ReimbursementControllerTest" name="testGetAllTest" time="0.13"/>
-  <testcase classname="com.project1.controllerTests.ReimbursementControllerTest" name="testApproveDeny" time="0"/>
-  <testcase classname="com.project1.controllerTests.ReimbursementControllerTest" name="testGetEmData" time="0"/>
+  <testcase classname="com.project1.controllerTests.ReimbursementControllerTest" name="testApproveDeny" time="3.149"/>
 </testsuite>

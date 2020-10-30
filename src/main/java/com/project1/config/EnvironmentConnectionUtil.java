@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 //password: wasspord
 
 public class EnvironmentConnectionUtil {
-	//final static Logger log = Logger.getLogger("EnvironmentConnectionUtil"); //currentSchema is optional,, default is public
+	final static Logger log = Logger.getLogger("EnvironmentConnectionUtil");
 	//url for jdbc -> jdbc:postgresql://endpoint:port/dbName?currentSchema=schema
 //	private final String url=System.getenv("url");
 //	private final String username =System.getenv("username");
@@ -39,7 +39,7 @@ public class EnvironmentConnectionUtil {
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			log.error(e);
 			e.printStackTrace();
 		}
 		return DriverManager.getConnection(url,username,password);

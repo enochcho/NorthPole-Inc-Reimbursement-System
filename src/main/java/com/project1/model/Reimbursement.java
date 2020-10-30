@@ -1,6 +1,7 @@
 package com.project1.model;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Date;
 
 /*

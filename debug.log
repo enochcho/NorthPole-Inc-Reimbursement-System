@@ -1,0 +1,7 @@
+2020-10-29 23:05:00 INFO  ReimbursementController:50 - retrieving all reimbursements
+2020-10-29 23:14:22 INFO  ReimbursementController:69 - Retrieved all of an employee's reimbursements
+2020-10-29 23:15:16 INFO  ReimbursementController:69 - Retrieved all of an employee's reimbursements
+2020-10-30 00:47:37 ERROR ReimbursementController:95 - com.fasterxml.jackson.core.JsonParseException: Unexpected character ('¬' (code 172)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')
+ at [Source: (com.project1.controllerTests.ReimbursementControllerTest$1); line: 1, column: 2]
+2020-10-30 00:52:28 ERROR ReimbursementController:95 - java.io.IOException: InputStream.read() returned 0 characters when trying to read 8000 bytes
+2020-10-30 00:54:00 ERROR ReimbursementController:95 - java.io.IOException: InputStream.read() returned 0 characters when trying to read 8000 bytes
