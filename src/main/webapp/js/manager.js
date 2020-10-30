@@ -121,7 +121,7 @@ async function apprvDeny(ace) {
     console.log(json);
     const rows = document.getElementById('reimbTableBody').innerHTML = '';
     const drops = document.getElementById('empDrop').innerHTML = '';
-    asyncFetch("http://localhost:8080/Project1/all.json", renderTable);
+    asyncFetch(url + "all.json", renderTable);
 }
 
 

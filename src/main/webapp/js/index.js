@@ -181,7 +181,7 @@ async function submitReimb(){
     console.log(json);
     const rows = document.getElementById('reimbTableBody').innerHTML = '';
     const thead = document.getElementById('reimbTableHead').innerHTML='';
-    asyncFetch("http://localhost:8080/Project1/all.json",renderTableE);
+    asyncFetch(url + "all.json",renderTableE);
 }
 
 //approving/denying a reimbursement (random right now)
@@ -202,7 +202,7 @@ async function apprvDeny(){
     console.log(json);
     const rows = document.getElementById('reimbTableBody').innerHTML = '';
     const thead = document.getElementById('reimbTableHead').innerHTML='';
-    asyncFetch("http://localhost:8080/Project1/all.json",renderTableE); //****change this later to F */
+    asyncFetch(url + "all.json",renderTableE); //****change this later to F */
 }
 
 
