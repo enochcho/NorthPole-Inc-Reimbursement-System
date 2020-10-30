@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project1.model.Reimbursement;
 import com.project1.model.User;
+import com.project1.model.UserRole;
 import com.project1.service.UserService;
 
 public class UserController {
@@ -19,13 +19,15 @@ public class UserController {
 	private static final Logger log = Logger.getLogger("UserController");
 	private UserService us;
 	private SessionController sc;
+	private ObjectMapper om;
 	
-	public UserController(UserService us, SessionController sc) {
+	public UserController(UserService us, SessionController sc, ObjectMapper om) {
 		this.us = us;
 		this.sc = sc;
+		this.om= om;
 	}
 	public UserController() {
-		this(new UserService(), new SessionController());
+		this(new UserService(), new SessionController(), new ObjectMapper());
 	}
 
 	public void login(HttpServletRequest req, HttpServletResponse resp) {
@@ -33,11 +35,10 @@ public class UserController {
 			String username = req.getParameter("username");
 			String password = req.getParameter("password");
 			User x = us.login(username, password);
-			System.out.println(username);
-			System.out.println(password);
+		
 			if(x != null) {
 				sc.setSession(req, x);
-				System.out.println("In the user controller " + sc.getSessionUser(req).getUsername());
+				log.info("In the user controller " + sc.getSessionUser(req).getUsername());
 				if(x.getRole().getRoleId() == 1) {
 					log.info(username + " logged in as a manager");
 					req.getRequestDispatcher("html/manager.html").forward(req, resp);
@@ -70,16 +71,27 @@ public class UserController {
 	}
 	public void register(HttpServletRequest req, HttpServletResponse resp) {
 		resp.setContentType("text/json");
-		JsonNode jsonNode;
 		try {
-			User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
-			int x = us.register(user);
+			
+			JsonNode inf = om.readTree(req.getInputStream());
+			int roleId = inf.get("roleId").asInt();
+			String password = inf.get("password").asText();
+			String username = inf.get("username").asText();
+			String first = inf.get("first").asText();
+			String last = inf.get("last").asText();
+			String email = inf.get("email").asText();
+			User user = new User(0,username, first, last, email, new UserRole(roleId));
+			int x = us.register(user, password);
+			
 			if(x == 1) {
 				log.info(user.getFirst() + " " + user.getLast() + " was successfully registered");
-				resp.getWriter().println(new ObjectMapper().writeValueAsString("You registered successfully! Please login"));
+				JsonNode node = om.readTree("{\"message\":\"You registered successfully! Please login.\"}");
+				resp.getWriter().println(node);
+				
 			} else {
 				log.info(user.getFirst() + " " + user.getLast() + "'s registration failed");
-				resp.getWriter().println(new ObjectMapper().writeValueAsString("Your registration was unsuccessful, please try again"));
+				JsonNode node = om.readTree("{\"message\":\"Your registration was unsuccessful, please try again.\"}");
+				resp.getWriter().println(node);
 			}
 		} catch (IOException e) {
 			log.error(e);

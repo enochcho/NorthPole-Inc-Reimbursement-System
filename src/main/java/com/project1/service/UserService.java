@@ -40,9 +40,9 @@ public class UserService {
 	 * @param user
 	 * @return 1 if the registration was successful, or 0 . 
 	 */
-	public int register(User user) {
+	public int register(User user, String password) {
 		log.info("Created a new user");
-		return ud.create(user);
+		return ud.register(user, password);
 	}
 
 }

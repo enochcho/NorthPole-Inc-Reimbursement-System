@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReimbursementController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project1</a> &gt; <a href="index.source.html" class="el_package">com.project1.controller</a> &gt; <span class="el_source">ReimbursementController.java</span></div><h1>ReimbursementController.java</h1><pre class="source lang-java linenums">package com.project1.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,17 +18,17 @@ public class ReimbursementController {
 	private ReimbursementService rs;
 	private SessionController sc;
 	private ObjectMapper om;
-<span class="fc" id="L22">	final static Logger log = Logger.getLogger(&quot;ReimbursementController&quot;);</span>
+<span class="fc" id="L21">	final static Logger log = Logger.getLogger(&quot;ReimbursementController&quot;);</span>
 	
-<span class="fc" id="L24">	public ReimbursementController(ReimbursementService rs, SessionController sc, ObjectMapper om) {</span>
-<span class="fc" id="L25">		this.rs = rs;</span>
-<span class="fc" id="L26">		this.sc = sc;</span>
-<span class="fc" id="L27">		this.om = om;</span>
-<span class="fc" id="L28">	}</span>
+<span class="fc" id="L23">	public ReimbursementController(ReimbursementService rs, SessionController sc, ObjectMapper om) {</span>
+<span class="fc" id="L24">		this.rs = rs;</span>
+<span class="fc" id="L25">		this.sc = sc;</span>
+<span class="fc" id="L26">		this.om = om;</span>
+<span class="fc" id="L27">	}</span>
 	
 	public ReimbursementController() {
-<span class="nc" id="L31">		this(new ReimbursementService(), new SessionController(), new ObjectMapper());</span>
-<span class="nc" id="L32">	}</span>
+<span class="nc" id="L30">		this(new ReimbursementService(), new SessionController(), new ObjectMapper());</span>
+<span class="nc" id="L31">	}</span>
 
 	/**
 	 * used by financial managers
@@ -37,8 +36,8 @@ public class ReimbursementController {
 	 * Sends a json of all the reimbursements
 	 */
 	public void getAll(HttpServletResponse resp) {
-<span class="nc" id="L40">		resp.setContentType(&quot;text/json&quot;);</span>
-<span class="nc" id="L41">		List&lt;Reimbursement&gt; reimbs = rs.findAll();</span>
+<span class="fc" id="L39">		resp.setContentType(&quot;text/json&quot;);</span>
+<span class="fc" id="L40">		List&lt;Reimbursement&gt; reimbs = rs.findAll();</span>
 //		UserRole role = new UserRole(2);
 //		ReimbursementType type = new ReimbursementType(1);
 //		ReimbursementStatus status = new ReimbursementStatus(1);
@@ -49,14 +48,14 @@ public class ReimbursementController {
 //		List&lt;Reimbursement&gt; reimbs = new ArrayList&lt;&gt;();
 //		reimbs.add(r);
 		try {
-<span class="nc" id="L52">			log.info(&quot;retrieving all reimbursements&quot;);</span>
-<span class="nc" id="L53">			resp.getWriter().println(om.writeValueAsString(reimbs));</span>
-<span class="nc" id="L54">		} catch(IOException e) {</span>
-<span class="nc" id="L55">			log.error(e);</span>
-<span class="nc" id="L56">			e.printStackTrace();			</span>
-<span class="nc" id="L57">		}</span>
+<span class="fc" id="L51">			log.info(&quot;retrieving all reimbursements&quot;);</span>
+<span class="fc" id="L52">			resp.getWriter().println(om.writeValueAsString(reimbs));</span>
+<span class="nc" id="L53">		} catch(IOException e) {</span>
+<span class="nc" id="L54">			log.error(e);</span>
+<span class="nc" id="L55">			e.printStackTrace();			</span>
+<span class="fc" id="L56">		}</span>
 		
-<span class="nc" id="L59">	}</span>
+<span class="fc" id="L58">	}</span>
 
 	/**
 	 * used by employees
@@ -65,16 +64,16 @@ public class ReimbursementController {
 	 * sends a json of an employee's reimbursements
 	 */
 	public void getEmData(HttpServletRequest req, HttpServletResponse resp) {
-<span class="nc" id="L68">		resp.setContentType(&quot;text/json&quot;);</span>
-<span class="nc" id="L69">		List&lt;Reimbursement&gt; reimbs = rs.viewMyTickets(sc.getSessionUser(req).getUserId());</span>
+<span class="fc" id="L67">		resp.setContentType(&quot;text/json&quot;);</span>
+<span class="fc" id="L68">		List&lt;Reimbursement&gt; reimbs = rs.viewMyTickets(sc.getSessionUser(req).getUserId());</span>
 		try {
-<span class="nc" id="L71">			log.info(&quot;Retrieved all of an employee's reimbursements&quot;);</span>
-<span class="nc" id="L72">			resp.getWriter().println(om.writeValueAsString(reimbs));</span>
-<span class="nc" id="L73">		} catch(IOException e) {</span>
-<span class="nc" id="L74">			log.error(e);</span>
-<span class="nc" id="L75">			e.printStackTrace();			</span>
-<span class="nc" id="L76">		}</span>
-<span class="nc" id="L77">	}</span>
+<span class="fc" id="L70">			log.info(&quot;Retrieved all of an employee's reimbursements&quot;);</span>
+<span class="fc" id="L71">			resp.getWriter().println(om.writeValueAsString(reimbs));</span>
+<span class="nc" id="L72">		} catch(IOException e) {</span>
+<span class="nc" id="L73">			log.error(e);</span>
+<span class="nc" id="L74">			e.printStackTrace();			</span>
+<span class="fc" id="L75">		}</span>
+<span class="fc" id="L76">	}</span>
 
 	/**
 	 * used by employees to add a reimbursement
@@ -84,20 +83,29 @@ public class ReimbursementController {
 	 */
 	public void add(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-<span class="nc" id="L87">			Reimbursement r = om.readValue(req.getInputStream(), Reimbursement.class);</span>
-<span class="nc" id="L88">			int x = rs.submitRequest(r,sc.getSessionUser(req).getUserId());</span>
-<span class="nc bnc" id="L89" title="All 2 branches missed.">			if(x ==1) {</span>
-<span class="nc" id="L90">				log.info(&quot;A reimbursement was added&quot;);</span>
-<span class="nc" id="L91">				resp.getWriter().println(om.writeValueAsString(&quot;The reimbursement was added&quot;));</span>
-			} else {
-<span class="nc" id="L93">				log.info(&quot;Something went wrong with the values and a reimbursement was not added.&quot;);</span>
-<span class="nc" id="L94">				resp.getWriter().println(om.writeValueAsString(&quot;The reimbursement was NOT added&quot;));</span>
+<span class="fc" id="L86">			Reimbursement r = om.readValue(req.getInputStream(), Reimbursement.class);</span>
+<span class="fc" id="L87">			int x = rs.submitRequest(r,sc.getSessionUser(req).getUserId());</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">			if(x ==1) {</span>
+<span class="fc" id="L89">				log.info(&quot;A reimbursement was added&quot;);</span>
+<span class="fc" id="L90">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;Success, the reimbursement has been added!\&quot;}&quot;);</span>
+<span class="fc" id="L91">				resp.getWriter().println(node);</span>
+<span class="fc" id="L92">			} else {</span>
+<span class="fc" id="L93">				log.info(&quot;Something went wrong with the values and a reimbursement was not added.&quot;);</span>
+<span class="fc" id="L94">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;Failure, the reimbursement has NOT been added!\&quot;}&quot;);</span>
+<span class="fc" id="L95">				resp.getWriter().println(node);</span>
 			}
-<span class="nc" id="L96">		}catch(IOException e) {</span>
-<span class="nc" id="L97">			log.error(e);</span>
-<span class="nc" id="L98">			e.printStackTrace();</span>
-<span class="nc" id="L99">		}</span>
-<span class="nc" id="L100">	}</span>
+<span class="nc" id="L97">		}catch(IOException e) {</span>
+			try {
+<span class="nc" id="L99">				log.info(&quot;Something went wrong with the values and a reimbursement was not added.&quot;);</span>
+<span class="nc" id="L100">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;Failure, the reimbursement has NOT been added!\&quot;}&quot;);</span>
+<span class="nc" id="L101">				resp.getWriter().println(node);</span>
+<span class="nc" id="L102">			} catch (IOException e1) {</span>
+<span class="nc" id="L103">				e1.printStackTrace();</span>
+<span class="nc" id="L104">			}</span>
+<span class="nc" id="L105">			log.error(e);</span>
+<span class="nc" id="L106">			e.printStackTrace();</span>
+<span class="fc" id="L107">		}</span>
+<span class="fc" id="L108">	}</span>
 	
 	/**
 	 * Used by Financial Managers to approve/deny
@@ -107,25 +115,26 @@ public class ReimbursementController {
 	 */
 	public void approveDeny(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-<span class="nc" id="L110">			System.out.println(&quot;In the reimbursement controller &quot; + sc.getSessionUser(req).getUsername());</span>
-<span class="nc" id="L111">			resp.setContentType(&quot;text/json&quot;);</span>
-<span class="nc" id="L112">			JsonNode jsonNode = om.readTree(req.getInputStream());</span>
-<span class="nc" id="L113">			int reimbId = jsonNode.get(&quot;reimbId&quot;).asInt();</span>
-<span class="nc" id="L114">			boolean approved = jsonNode.get(&quot;approved&quot;).asBoolean();</span>
-<span class="nc" id="L115">			User approver = sc.getSessionUser(req);</span>
-<span class="nc" id="L116">			int x = rs.approveDeny(approver.getUserId(), reimbId, approved);</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">			if(x == 1) {</span>
-<span class="nc" id="L118">				log.info(&quot;the reimbursement was updated&quot;);</span>
-<span class="nc" id="L119">				resp.getWriter().println(om.writeValueAsString(&quot;The reimbursement was approved/denied&quot;));</span>
-			} else {
-<span class="nc" id="L121">				log.info(&quot;something was wrong with the reimbursement and it wasn't updated&quot;);</span>
-<span class="nc" id="L122">				resp.getWriter().println(om.writeValueAsString(&quot;The reimbursement wasn't approved or denied&quot;));</span>
+<span class="fc" id="L118">			resp.setContentType(&quot;text/json&quot;);</span>
+<span class="fc" id="L119">			JsonNode jsonNode = om.readTree(req.getInputStream());</span>
+<span class="fc" id="L120">			int reimbId = jsonNode.get(&quot;reimbId&quot;).asInt();</span>
+<span class="fc" id="L121">			boolean approved = jsonNode.get(&quot;approved&quot;).asBoolean();</span>
+<span class="fc" id="L122">			User approver = sc.getSessionUser(req);</span>
+<span class="fc" id="L123">			int x = rs.approveDeny(approver.getUserId(), reimbId, approved);</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">			if(x == 1) {</span>
+<span class="fc" id="L125">				log.info(&quot;the reimbursement was updated&quot;);</span>
+<span class="fc" id="L126">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;The reimbursement has been updated!\&quot;}&quot;);</span>
+<span class="fc" id="L127">				resp.getWriter().println(node);</span>
+<span class="fc" id="L128">			} else {</span>
+<span class="fc" id="L129">				log.info(&quot;something was wrong with the reimbursement and it wasn't updated&quot;);</span>
+<span class="fc" id="L130">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;The reimbursement has been updated!\&quot;}&quot;);</span>
+<span class="fc" id="L131">				resp.getWriter().println(node);</span>
 			}
-<span class="nc" id="L124">		}catch (IOException e) {</span>
-<span class="nc" id="L125">			log.error(e);</span>
-<span class="nc" id="L126">			e.printStackTrace();</span>
-<span class="nc" id="L127">		}</span>
-<span class="nc" id="L128">	}</span>
+<span class="nc" id="L133">		}catch (IOException e) {</span>
+<span class="nc" id="L134">			log.error(e);</span>
+<span class="nc" id="L135">			e.printStackTrace();</span>
+<span class="fc" id="L136">		}</span>
+<span class="fc" id="L137">	}</span>
 	
 	
 

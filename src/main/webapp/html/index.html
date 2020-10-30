@@ -38,7 +38,7 @@
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <h1 class="display-4" id=d4></h1>
-                    <p class="lead">Welcome to the Reimbursement Portal</p>
+                    <p class="lead" id="msg">Welcome to the Reimbursement Portal</p>
                     <hr class="my-4">
                     <div class="container">
                         <div class="row">
@@ -62,7 +62,7 @@
                                     <div class="row justify-content-center">
                                         <!--<button type = "button" class = "btn btn-primary"> Register</button>-->
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target=".bd-example-modal-lg">Add Reimbursement Request</button>
+                                            data-target=".bd-example-modal-lg">Register</button>
                                     </div>
                                 </div>
                             </div>
@@ -84,22 +84,11 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="input-group mb-3">
-                                            <div class=container>
-                                                <div class="row">
-                                                    <div class="input-group-prepend col-3" id = "one">
-                                                        <span class="input-group-text" id="three">Username</span>
-                                                    </div>
-                                                    <div class = "col-9" id = "two">
-                                                        <input type="text" id="inusername" class="form-control"
-                                                            aria-label="Username" placeholder="...">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <small id="passwordHelpBlock" class="form-text text-muted">
-                                                        Your password must be djdjdjd
-                                                    </small>
-                                                </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id ="prepassword">Username</span>
                                             </div>
+                                            <input type="text" id="inusername" class="form-control"
+                                                aria-label="Username" placeholder="...">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -107,7 +96,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id ="prepassword">Password</span>
                                             </div>
-                                            <input type="text" id="inpassword" class="form-control"
+                                            <input type="password" id="inpassword" class="form-control"
                                                 aria-label="Username" placeholder="...">
                                         </div>
                                     </div>

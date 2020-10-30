@@ -20,20 +20,20 @@ public class UserDao implements DaoContract&lt;User,Integer&gt;{
 
 	@Override
 	public List&lt;User&gt; findAll() {
-<span class="nc" id="L23">		List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L24">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
-<span class="nc" id="L25">			String sql = &quot;select * from ers_users;&quot;;</span>
-<span class="nc" id="L26">			PreparedStatement ps = con.prepareStatement(sql);</span>
-<span class="nc" id="L27">			ResultSet rs = ps.executeQuery();</span>
-<span class="nc bnc" id="L28" title="All 2 branches missed.">			while(rs.next()) {</span>
-<span class="nc" id="L29">				users.add(new User(rs.getInt(1),rs.getString(2), rs.getString(4), rs.getString(5),rs.getString(6),new UserRole(rs.getInt(7))));</span>
+<span class="fc" id="L23">		List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="fc" id="L25">			String sql = &quot;select * from ers_users;&quot;;</span>
+<span class="fc" id="L26">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="fc" id="L27">			ResultSet rs = ps.executeQuery();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L29">				users.add(new User(rs.getInt(1),rs.getString(2), rs.getString(4), rs.getString(5),rs.getString(6),new UserRole(rs.getInt(7))));</span>
 			}
-<span class="nc" id="L31">			rs.close();</span>
-<span class="nc" id="L32">			ps.close();</span>
+<span class="fc" id="L31">			rs.close();</span>
+<span class="fc" id="L32">			ps.close();</span>
 <span class="nc" id="L33">		} catch (SQLException e) {</span>
 <span class="nc" id="L34">			e.printStackTrace();</span>
-<span class="nc" id="L35">		}</span>
-<span class="nc" id="L36">		return users;</span>
+<span class="fc" id="L35">		}</span>
+<span class="fc" id="L36">		return users;</span>
 	}
 
 	@Override
@@ -93,20 +93,40 @@ public class UserDao implements DaoContract&lt;User,Integer&gt;{
 <span class="nc" id="L93">		}</span>
 <span class="nc" id="L94">		return result;</span>
 	}
+	
+	
+	public int register(User t, String password) {
+<span class="nc" id="L99">		int result = 0;</span>
+<span class="nc" id="L100">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="nc" id="L101">			String sql = &quot;insert into ers_users (ers_username, user_first_name, user_last_name, user_email, user_role_id, ers_password) values (?,?,?,?,?,?);&quot;;</span>
+<span class="nc" id="L102">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="nc" id="L103">			ps.setString(1, t.getUsername());</span>
+<span class="nc" id="L104">			ps.setString(2, t.getFirst());</span>
+<span class="nc" id="L105">			ps.setString(3,  t.getLast());</span>
+<span class="nc" id="L106">			ps.setString(4, t.getEmail());</span>
+<span class="nc" id="L107">			ps.setInt(5, t.getRole().getRoleId());</span>
+<span class="nc" id="L108">			ps.setString(6,  password);</span>
+<span class="nc" id="L109">			result = ps.executeUpdate();</span>
+<span class="nc" id="L110">			ps.close();</span>
+<span class="nc" id="L111">		} catch (SQLException e) {</span>
+<span class="nc" id="L112">			e.printStackTrace();</span>
+<span class="nc" id="L113">		}</span>
+<span class="nc" id="L114">		return result;</span>
+	}
 
 	@Override
 	public int delete(Integer i) {
-<span class="nc" id="L99">		int result = 0;</span>
-<span class="nc" id="L100">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
-<span class="nc" id="L101">			String sql = &quot;delete from ers_users where ers_users_id = ?;&quot;;</span>
-<span class="nc" id="L102">			PreparedStatement ps = con.prepareStatement(sql);</span>
-<span class="nc" id="L103">			ps.setInt(1, i);</span>
-<span class="nc" id="L104">			result = ps.executeUpdate();</span>
-<span class="nc" id="L105">			ps.close();</span>
-<span class="nc" id="L106">		} catch (SQLException e) {</span>
-<span class="nc" id="L107">			e.printStackTrace();</span>
-<span class="nc" id="L108">		}</span>
-<span class="nc" id="L109">		return result;</span>
+<span class="nc" id="L119">		int result = 0;</span>
+<span class="nc" id="L120">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="nc" id="L121">			String sql = &quot;delete from ers_users where ers_users_id = ?;&quot;;</span>
+<span class="nc" id="L122">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="nc" id="L123">			ps.setInt(1, i);</span>
+<span class="nc" id="L124">			result = ps.executeUpdate();</span>
+<span class="nc" id="L125">			ps.close();</span>
+<span class="nc" id="L126">		} catch (SQLException e) {</span>
+<span class="nc" id="L127">			e.printStackTrace();</span>
+<span class="nc" id="L128">		}</span>
+<span class="nc" id="L129">		return result;</span>
 	}
 	
 	/**
@@ -116,22 +136,22 @@ public class UserDao implements DaoContract&lt;User,Integer&gt;{
 	 * @return userid  or 0 if unsuccessful login
 	 */
 	public int login(String username, String password) {
-<span class="fc" id="L119">		int result = 0;</span>
-<span class="fc" id="L120">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
-<span class="fc" id="L121">			String sql = &quot;call login(?,?,0)&quot;;</span>
-<span class="fc" id="L122">			CallableStatement cs = con.prepareCall(sql);</span>
-<span class="fc" id="L123">			cs.setString(1,  username);</span>
-<span class="fc" id="L124">			cs.setString(2,  password);</span>
-<span class="fc" id="L125">			ResultSet rs = cs.executeQuery();</span>
-<span class="pc bpc" id="L126" title="1 of 2 branches missed.">			if(rs.next()) {</span>
-<span class="fc" id="L127">				result = rs.getInt(1);</span>
+<span class="fc" id="L139">		int result = 0;</span>
+<span class="fc" id="L140">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="fc" id="L141">			String sql = &quot;call login(?,?,0)&quot;;</span>
+<span class="fc" id="L142">			CallableStatement cs = con.prepareCall(sql);</span>
+<span class="fc" id="L143">			cs.setString(1,  username);</span>
+<span class="fc" id="L144">			cs.setString(2,  password);</span>
+<span class="fc" id="L145">			ResultSet rs = cs.executeQuery();</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">			if(rs.next()) {</span>
+<span class="fc" id="L147">				result = rs.getInt(1);</span>
 			}
-<span class="fc" id="L129">			rs.close();</span>
-<span class="fc" id="L130">			cs.close();</span>
-<span class="nc" id="L131">		} catch (SQLException e) {</span>
-<span class="nc" id="L132">			e.printStackTrace();</span>
-<span class="fc" id="L133">		}</span>
-<span class="fc" id="L134">		return result;</span>
+<span class="fc" id="L149">			rs.close();</span>
+<span class="fc" id="L150">			cs.close();</span>
+<span class="nc" id="L151">		} catch (SQLException e) {</span>
+<span class="nc" id="L152">			e.printStackTrace();</span>
+<span class="fc" id="L153">		}</span>
+<span class="fc" id="L154">		return result;</span>
 	}
 	
 

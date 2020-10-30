@@ -10,83 +10,95 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project1.model.Reimbursement;
 import com.project1.model.User;
+import com.project1.model.UserRole;
 import com.project1.service.UserService;
 
 public class UserController {
 	
-<span class="nc" id="L19">	private static final Logger log = Logger.getLogger(&quot;UserController&quot;);</span>
+<span class="fc" id="L19">	private static final Logger log = Logger.getLogger(&quot;UserController&quot;);</span>
 	private UserService us;
 	private SessionController sc;
+	private ObjectMapper om;
 	
-<span class="nc" id="L23">	public UserController(UserService us, SessionController sc) {</span>
-<span class="nc" id="L24">		this.us = us;</span>
-<span class="nc" id="L25">		this.sc = sc;</span>
-<span class="nc" id="L26">	}</span>
+<span class="fc" id="L24">	public UserController(UserService us, SessionController sc, ObjectMapper om) {</span>
+<span class="fc" id="L25">		this.us = us;</span>
+<span class="fc" id="L26">		this.sc = sc;</span>
+<span class="fc" id="L27">		this.om= om;</span>
+<span class="fc" id="L28">	}</span>
 	public UserController() {
-<span class="nc" id="L28">		this(new UserService(), new SessionController());</span>
-<span class="nc" id="L29">	}</span>
+<span class="nc" id="L30">		this(new UserService(), new SessionController(), new ObjectMapper());</span>
+<span class="nc" id="L31">	}</span>
 
 	public void login(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-<span class="nc" id="L33">			String username = req.getParameter(&quot;username&quot;);</span>
-<span class="nc" id="L34">			String password = req.getParameter(&quot;password&quot;);</span>
-<span class="nc" id="L35">			User x = us.login(username, password);</span>
-<span class="nc" id="L36">			System.out.println(username);</span>
-<span class="nc" id="L37">			System.out.println(password);</span>
-<span class="nc bnc" id="L38" title="All 2 branches missed.">			if(x != null) {</span>
-<span class="nc" id="L39">				sc.setSession(req, x);</span>
-<span class="nc" id="L40">				System.out.println(&quot;In the user controller &quot; + sc.getSessionUser(req).getUsername());</span>
-<span class="nc bnc" id="L41" title="All 2 branches missed.">				if(x.getRole().getRoleId() == 1) {</span>
-<span class="nc" id="L42">					log.info(username + &quot; logged in as a manager&quot;);</span>
-<span class="nc" id="L43">					req.getRequestDispatcher(&quot;html/manager.html&quot;).forward(req, resp);</span>
+<span class="fc" id="L35">			String username = req.getParameter(&quot;username&quot;);</span>
+<span class="fc" id="L36">			String password = req.getParameter(&quot;password&quot;);</span>
+<span class="fc" id="L37">			User x = us.login(username, password);</span>
+		
+<span class="fc bfc" id="L39" title="All 2 branches covered.">			if(x != null) {</span>
+<span class="fc" id="L40">				sc.setSession(req, x);</span>
+<span class="fc" id="L41">				log.info(&quot;In the user controller &quot; + sc.getSessionUser(req).getUsername());</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">				if(x.getRole().getRoleId() == 1) {</span>
+<span class="fc" id="L43">					log.info(username + &quot; logged in as a manager&quot;);</span>
+<span class="fc" id="L44">					req.getRequestDispatcher(&quot;html/manager.html&quot;).forward(req, resp);</span>
 				} else {
-<span class="nc" id="L45">					log.info(username + &quot; logged in as an employee&quot;);</span>
-<span class="nc" id="L46">					req.getRequestDispatcher(&quot;html/employee.html&quot;).forward(req, resp);</span>
+<span class="fc" id="L46">					log.info(username + &quot; logged in as an employee&quot;);</span>
+<span class="fc" id="L47">					req.getRequestDispatcher(&quot;html/employee.html&quot;).forward(req, resp);</span>
 				}
 			} else {
-<span class="nc" id="L49">				log.info(username + &quot; attempted to login but failed&quot;);</span>
-<span class="nc" id="L50">				req.getRequestDispatcher(&quot;html/index.html&quot;).forward(req, resp);</span>
+<span class="fc" id="L50">				log.info(username + &quot; attempted to login but failed&quot;);</span>
+<span class="fc" id="L51">				req.getRequestDispatcher(&quot;html/index.html&quot;).forward(req, resp);</span>
 			}
-<span class="nc" id="L52">		}catch (IOException | ServletException e) {</span>
-<span class="nc" id="L53">			log.error(e);</span>
-<span class="nc" id="L54">			e.printStackTrace();</span>
-<span class="nc" id="L55">		}</span>
+<span class="nc" id="L53">		}catch (IOException | ServletException e) {</span>
+<span class="nc" id="L54">			log.error(e);</span>
+<span class="nc" id="L55">			e.printStackTrace();</span>
+<span class="fc" id="L56">		}</span>
 		
-<span class="nc" id="L57">	}</span>
+<span class="fc" id="L58">	}</span>
 	
 	
 	public void logout(HttpServletRequest req, HttpServletResponse resp) {
-<span class="nc" id="L61">		sc.invalidate(req);</span>
-<span class="nc" id="L62">		log.info(&quot;The session was invalidated&quot;);</span>
+<span class="fc" id="L62">		sc.invalidate(req);</span>
+<span class="fc" id="L63">		log.info(&quot;The session was invalidated&quot;);</span>
 		try {
-<span class="nc" id="L64">			req.getRequestDispatcher(&quot;html/index.html&quot;).forward(req, resp);</span>
-<span class="nc" id="L65">		} catch (ServletException | IOException e) {</span>
-<span class="nc" id="L66">			log.error(e);</span>
-<span class="nc" id="L67">			e.printStackTrace();</span>
-<span class="nc" id="L68">		}</span>
+<span class="fc" id="L65">			req.getRequestDispatcher(&quot;html/index.html&quot;).forward(req, resp);</span>
+<span class="nc" id="L66">		} catch (ServletException | IOException e) {</span>
+<span class="nc" id="L67">			log.error(e);</span>
+<span class="nc" id="L68">			e.printStackTrace();</span>
+<span class="fc" id="L69">		}</span>
 		
-<span class="nc" id="L70">	}</span>
+<span class="fc" id="L71">	}</span>
 	public void register(HttpServletRequest req, HttpServletResponse resp) {
-<span class="nc" id="L72">		resp.setContentType(&quot;text/json&quot;);</span>
-		JsonNode jsonNode;
+<span class="fc" id="L73">		resp.setContentType(&quot;text/json&quot;);</span>
 		try {
-<span class="nc" id="L75">			User user = new ObjectMapper().readValue(req.getInputStream(), User.class);</span>
-<span class="nc" id="L76">			int x = us.register(user);</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">			if(x == 1) {</span>
-<span class="nc" id="L78">				log.info(user.getFirst() + &quot; &quot; + user.getLast() + &quot; was successfully registered&quot;);</span>
-<span class="nc" id="L79">				resp.getWriter().println(new ObjectMapper().writeValueAsString(&quot;You registered successfully! Please login&quot;));</span>
-			} else {
-<span class="nc" id="L81">				log.info(user.getFirst() + &quot; &quot; + user.getLast() + &quot;'s registration failed&quot;);</span>
-<span class="nc" id="L82">				resp.getWriter().println(new ObjectMapper().writeValueAsString(&quot;Your registration was unsuccessful, please try again&quot;));</span>
+			
+<span class="fc" id="L76">			JsonNode inf = om.readTree(req.getInputStream());</span>
+<span class="fc" id="L77">			int roleId = inf.get(&quot;roleId&quot;).asInt();</span>
+<span class="fc" id="L78">			String password = inf.get(&quot;password&quot;).asText();</span>
+<span class="fc" id="L79">			String username = inf.get(&quot;username&quot;).asText();</span>
+<span class="fc" id="L80">			String first = inf.get(&quot;first&quot;).asText();</span>
+<span class="fc" id="L81">			String last = inf.get(&quot;last&quot;).asText();</span>
+<span class="fc" id="L82">			String email = inf.get(&quot;email&quot;).asText();</span>
+<span class="fc" id="L83">			User user = new User(0,username, first, last, email, new UserRole(roleId));</span>
+<span class="fc" id="L84">			int x = us.register(user, password);</span>
+			
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">			if(x == 1) {</span>
+<span class="nc" id="L87">				log.info(user.getFirst() + &quot; &quot; + user.getLast() + &quot; was successfully registered&quot;);</span>
+<span class="nc" id="L88">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;You registered successfully! Please login.\&quot;}&quot;);</span>
+<span class="nc" id="L89">				resp.getWriter().println(node);</span>
+				
+<span class="nc" id="L91">			} else {</span>
+<span class="fc" id="L92">				log.info(user.getFirst() + &quot; &quot; + user.getLast() + &quot;'s registration failed&quot;);</span>
+<span class="fc" id="L93">				JsonNode node = om.readTree(&quot;{\&quot;message\&quot;:\&quot;Your registration was unsuccessful, please try again.\&quot;}&quot;);</span>
+<span class="fc" id="L94">				resp.getWriter().println(node);</span>
 			}
-<span class="nc" id="L84">		} catch (IOException e) {</span>
-<span class="nc" id="L85">			log.error(e);</span>
-<span class="nc" id="L86">			e.printStackTrace();</span>
-<span class="nc" id="L87">		}</span>
+<span class="nc" id="L96">		} catch (IOException e) {</span>
+<span class="nc" id="L97">			log.error(e);</span>
+<span class="nc" id="L98">			e.printStackTrace();</span>
+<span class="fc" id="L99">		}</span>
 		
-<span class="nc" id="L89">	}</span>
+<span class="fc" id="L101">	}</span>
 	
 
 }

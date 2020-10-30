@@ -3,19 +3,12 @@ package com.project1.serviceTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.project1.model.Reimbursement;
-import com.project1.model.ReimbursementStatus;
-import com.project1.model.ReimbursementType;
-import com.project1.model.User;
-import com.project1.model.UserRole;
 import com.project1.repo.ReimbursementDao;
+import com.project1.repo.UserDao;
 import com.project1.service.ReimbursementService;
 
 public class ReimbursementServiceTest {
@@ -73,7 +66,7 @@ public class ReimbursementServiceTest {
 	@Test
 	public void testApproveDeny() {
 		int approverId = 1;
-		int reimbId = 4;
+		int reimbId = 1;
 		assertEquals(rs.approveDeny(approverId, reimbId, true), 1, 0);
 	}
 	

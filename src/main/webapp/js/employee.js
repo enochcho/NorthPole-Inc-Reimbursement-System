@@ -73,7 +73,7 @@ async function submitReimb() {
             statusId: 1
         },
         type: {
-            typeId: 3
+            typeId: document.getElementById("intype").value
         }
     };
     const fetched = await fetch(url + 'add.json', {
@@ -84,7 +84,7 @@ async function submitReimb() {
         body: JSON.stringify(reimb),
     });
     const json = await fetched.json();
-    console.log(json);
+    document.getElementById("message").innerText = json.message;
     const rows = document.getElementById('reimbTableBody').innerHTML = '';
     asyncFetch("http://localhost:8080/Project1/empl.json", renderTable);
 }

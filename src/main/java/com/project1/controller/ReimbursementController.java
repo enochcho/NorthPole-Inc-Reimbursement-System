@@ -1,7 +1,6 @@
 package com.project1.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,12 +87,21 @@ public class ReimbursementController {
 			int x = rs.submitRequest(r,sc.getSessionUser(req).getUserId());
 			if(x ==1) {
 				log.info("A reimbursement was added");
-				resp.getWriter().println(om.writeValueAsString("The reimbursement was added"));
+				JsonNode node = om.readTree("{\"message\":\"Success, the reimbursement has been added!\"}");
+				resp.getWriter().println(node);
 			} else {
 				log.info("Something went wrong with the values and a reimbursement was not added.");
-				resp.getWriter().println(om.writeValueAsString("The reimbursement was NOT added"));
+				JsonNode node = om.readTree("{\"message\":\"Failure, the reimbursement has NOT been added!\"}");
+				resp.getWriter().println(node);
 			}
 		}catch(IOException e) {
+			try {
+				log.info("Something went wrong with the values and a reimbursement was not added.");
+				JsonNode node = om.readTree("{\"message\":\"Failure, the reimbursement has NOT been added!\"}");
+				resp.getWriter().println(node);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			log.error(e);
 			e.printStackTrace();
 		}
@@ -107,7 +115,6 @@ public class ReimbursementController {
 	 */
 	public void approveDeny(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			System.out.println("In the reimbursement controller " + sc.getSessionUser(req).getUsername());
 			resp.setContentType("text/json");
 			JsonNode jsonNode = om.readTree(req.getInputStream());
 			int reimbId = jsonNode.get("reimbId").asInt();
@@ -116,10 +123,12 @@ public class ReimbursementController {
 			int x = rs.approveDeny(approver.getUserId(), reimbId, approved);
 			if(x == 1) {
 				log.info("the reimbursement was updated");
-				resp.getWriter().println(om.writeValueAsString("The reimbursement was approved/denied"));
+				JsonNode node = om.readTree("{\"message\":\"The reimbursement has been updated!\"}");
+				resp.getWriter().println(node);
 			} else {
 				log.info("something was wrong with the reimbursement and it wasn't updated");
-				resp.getWriter().println(om.writeValueAsString("The reimbursement wasn't approved or denied"));
+				JsonNode node = om.readTree("{\"message\":\"The reimbursement has been updated!\"}");
+				resp.getWriter().println(node);
 			}
 		}catch (IOException e) {
 			log.error(e);

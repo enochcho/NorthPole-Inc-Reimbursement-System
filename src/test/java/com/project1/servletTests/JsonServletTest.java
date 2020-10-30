@@ -2,6 +2,8 @@ package com.project1.servletTests;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 
 import com.project1.servlet.JsonServlet;
 
@@ -15,14 +17,5 @@ public class JsonServletTest {
 	}
 	
 	
-	@Test
-	public void doGetTest() {
-		
-	}
 	
-	@Test
-	public void doPostTest() {
-		
-	}
-
 }

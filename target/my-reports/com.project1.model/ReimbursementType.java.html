@@ -11,10 +11,10 @@ public class ReimbursementType {
 <span class="fc" id="L11">	public ReimbursementType(int type) {</span>
 <span class="pc bpc" id="L12" title="1 of 2 branches missed.">		if(validate(type)) {</span>
 <span class="fc" id="L13">			this.type = type;</span>
-<span class="pc bpc" id="L14" title="3 of 5 branches missed.">			switch(type) {</span>
+<span class="pc bpc" id="L14" title="2 of 5 branches missed.">			switch(type) {</span>
 			case 1:
-<span class="nc" id="L16">				this.str = &quot;Lodging&quot;;</span>
-<span class="nc" id="L17">				break;</span>
+<span class="fc" id="L16">				this.str = &quot;Lodging&quot;;</span>
+<span class="fc" id="L17">				break;</span>
 			case 2:
 <span class="nc" id="L19">				this.str = &quot;Travel&quot;;</span>
 <span class="nc" id="L20">				break;</span>
@@ -47,15 +47,15 @@ public class ReimbursementType {
 	
 	@Override
 	public String toString() {
-<span class="nc bnc" id="L50" title="All 5 branches missed.">		switch(type) {</span>
+<span class="pc bpc" id="L50" title="1 of 5 branches missed.">		switch(type) {</span>
 		case 1:
-<span class="nc" id="L52">			return &quot;Lodging&quot;;</span>
+<span class="fc" id="L52">			return &quot;Lodging&quot;;</span>
 		case 2:
-<span class="nc" id="L54">			return &quot;Travel&quot;;</span>
+<span class="fc" id="L54">			return &quot;Travel&quot;;</span>
 		case 3:
-<span class="nc" id="L56">			return &quot;Food&quot;;</span>
+<span class="fc" id="L56">			return &quot;Food&quot;;</span>
 		case 4:
-<span class="nc" id="L58">			return &quot;Other&quot;;</span>
+<span class="fc" id="L58">			return &quot;Other&quot;;</span>
 		default:
 <span class="nc" id="L60">			return &quot;Something is wrong with the type&quot;;</span>
 		}

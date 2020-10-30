@@ -7,7 +7,7 @@ public class ReimbursementStatus {
 <span class="fc" id="L7">	public ReimbursementStatus(int status) {</span>
 <span class="pc bpc" id="L8" title="1 of 2 branches missed.">		if(validate(status)) {</span>
 <span class="fc" id="L9">			this.status = status;</span>
-<span class="pc bpc" id="L10" title="1 of 4 branches missed.">			switch(status) {</span>
+<span class="pc bpc" id="L10" title="2 of 4 branches missed.">			switch(status) {</span>
 			case 1:
 <span class="fc" id="L12">				this.str =  &quot;Pending&quot;;</span>
 <span class="fc" id="L13">				break;</span>
@@ -15,8 +15,8 @@ public class ReimbursementStatus {
 <span class="fc" id="L15">				this.str = &quot;Approved&quot;;</span>
 <span class="fc" id="L16">				break;</span>
 			case 3:
-<span class="fc" id="L18">				this.str =  &quot;Denied&quot;;</span>
-<span class="fc" id="L19">				break;</span>
+<span class="nc" id="L18">				this.str =  &quot;Denied&quot;;</span>
+<span class="nc" id="L19">				break;</span>
 			default:
 <span class="nc" id="L21">				this.str = &quot;something is wrong&quot;;</span>
 <span class="nc" id="L22">				break;</span>

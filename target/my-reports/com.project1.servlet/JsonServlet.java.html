@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 @WebServlet (name = &quot;jsonServlet&quot;, urlPatterns = {&quot;*.json&quot;})
-<span class="fc" id="L14">public class JsonServlet extends HttpServlet{</span>
-<span class="fc" id="L15">	private static final Logger log = Logger.getLogger(&quot;JsonServlet&quot;);</span>
+<span class="nc" id="L14">public class JsonServlet extends HttpServlet{</span>
+<span class="nc" id="L15">	private static final Logger log = Logger.getLogger(&quot;JsonServlet&quot;);</span>
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

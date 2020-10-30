@@ -58,5 +58,29 @@ public class ModelTest {
 	public void testReimbursement() {
 		assertEquals(100, reimb.getAmount(), 0);
 	}
+	
+	@Test
+	public void testReimbursementType() {
+		ReimbursementType b = new ReimbursementType(3);
+		b.setTypeId(1);
+		String a = b.toString();
+		b.setTypeId(2);
+		String aa = b.toString();
+		b.setTypeId(3);
+		String c = b.toString();
+		b.setTypeId(4);
+		String d = b.toString();
+		assertEquals(a, "Lodging");
+		assertEquals(aa,"Travel");
+		assertEquals(c,"Food");
+		assertEquals(d,"Other");
+	}
+	
+	@Test
+	public void testSetRole() {
+		UserRole rr = new UserRole(1);
+		assertTrue(rr.setRoleId(1));
+		assertFalse(rr.setRoleId(44));
+	}
 
 }

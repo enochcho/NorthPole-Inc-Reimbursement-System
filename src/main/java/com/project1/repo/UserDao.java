@@ -93,6 +93,26 @@ public class UserDao implements DaoContract<User,Integer>{
 		}
 		return result;
 	}
+	
+	
+	public int register(User t, String password) {
+		int result = 0;
+		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){
+			String sql = "insert into ers_users (ers_username, user_first_name, user_last_name, user_email, user_role_id, ers_password) values (?,?,?,?,?,?);";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, t.getUsername());
+			ps.setString(2, t.getFirst());
+			ps.setString(3,  t.getLast());
+			ps.setString(4, t.getEmail());
+			ps.setInt(5, t.getRole().getRoleId());
+			ps.setString(6,  password);
+			result = ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public int delete(Integer i) {
