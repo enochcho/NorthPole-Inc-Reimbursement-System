@@ -1,8 +1,8 @@
 
 
 //url for local host and ec2
-//const url = "http://52.87.233.199:8081/Project1/";
-const url = "http://localhost:8080/Project1/";
+const url = "http://52.87.233.199:8081/Project1/";
+//const url = "http://localhost:8080/Project1/";
 
 
 /**
