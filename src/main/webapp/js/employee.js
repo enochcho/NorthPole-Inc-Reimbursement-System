@@ -86,7 +86,7 @@ async function submitReimb() {
     const json = await fetched.json();
     document.getElementById("message").innerText = json.message;
     const rows = document.getElementById('reimbTableBody').innerHTML = '';
-    asyncFetch("http://localhost:8080/Project1/empl.json", renderTable);
+    asyncFetch(url+"empl.json", renderTable);
 }
 
 
