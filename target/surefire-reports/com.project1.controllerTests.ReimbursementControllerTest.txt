@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.project1.controllerTests.ReimbursementControllerTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.618 sec
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.526 sec

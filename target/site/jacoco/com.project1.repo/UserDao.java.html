@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Project1</a> &gt; <a href="index.source.html" class="el_package">com.project1.repo</a> &gt; <span class="el_source">UserDao.java</span></div><h1>UserDao.java</h1><pre class="source lang-java linenums">package com.project1.repo;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.project1.config.EnvironmentConnectionUtil;
+import com.project1.model.User;
+import com.project1.model.UserRole;
+
+public class UserDao implements DaoContract&lt;User,Integer&gt;{
+	
+	public UserDao() {
+<span class="fc" id="L18">		super();</span>
+<span class="fc" id="L19">	}</span>
+
+	@Override
+	public List&lt;User&gt; findAll() {
+<span class="fc" id="L23">		List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="fc" id="L25">			String sql = &quot;select * from ers_users;&quot;;</span>
+<span class="fc" id="L26">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="fc" id="L27">			ResultSet rs = ps.executeQuery();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">			while(rs.next()) {</span>
+<span class="fc" id="L29">				users.add(new User(rs.getInt(1),rs.getString(2), rs.getString(4), rs.getString(5),rs.getString(6),new UserRole(rs.getInt(7))));</span>
+			}
+<span class="fc" id="L31">			rs.close();</span>
+<span class="fc" id="L32">			ps.close();</span>
+<span class="nc" id="L33">		} catch (SQLException e) {</span>
+<span class="nc" id="L34">			e.printStackTrace();</span>
+<span class="fc" id="L35">		}</span>
+<span class="fc" id="L36">		return users;</span>
+	}
+
+	@Override
+	public User findById(Integer i) {
+<span class="fc" id="L41">		User user = null;</span>
+<span class="fc" id="L42">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="fc" id="L43">			String sql = &quot;select * from ers_users where ers_users_id = ?;&quot;;</span>
+<span class="fc" id="L44">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="fc" id="L45">			ps.setInt(1,  i);</span>
+<span class="fc" id="L46">			ResultSet rs = ps.executeQuery();</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">			if(rs.next()) {</span>
+<span class="fc" id="L48">				user = new User(rs.getInt(1),rs.getString(2), rs.getString(4), rs.getString(5),rs.getString(6),new UserRole(rs.getInt(7)));</span>
+			}
+<span class="fc" id="L50">			rs.close();</span>
+<span class="fc" id="L51">			ps.close();</span>
+<span class="nc" id="L52">		} catch (SQLException e) {</span>
+<span class="nc" id="L53">			e.printStackTrace();</span>
+<span class="fc" id="L54">		}</span>
+<span class="fc" id="L55">		return user;</span>
+	}
+
+	@Override
+	public int update(User t) {
+<span class="nc" id="L60">		int result = 0;</span>
+<span class="nc" id="L61">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="nc" id="L62">			String sql = &quot;update ers_users set ers_username = ?, user_first_name= ?, user_last_name = ?, user_email = ?, user_role_id = ? where ers_users_id = ?;&quot;;</span>
+<span class="nc" id="L63">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="nc" id="L64">			ps.setString(1, t.getUsername());</span>
+<span class="nc" id="L65">			ps.setString(2, t.getFirst());</span>
+<span class="nc" id="L66">			ps.setString(3,  t.getLast());</span>
+<span class="nc" id="L67">			ps.setString(4, t.getEmail());</span>
+<span class="nc" id="L68">			ps.setInt(5, t.getRole().getRoleId());</span>
+<span class="nc" id="L69">			ps.setInt(6, t.getUserId());</span>
+<span class="nc" id="L70">			result = ps.executeUpdate();</span>
+<span class="nc" id="L71">			ps.close();</span>
+<span class="nc" id="L72">		} catch (SQLException e) {</span>
+<span class="nc" id="L73">			e.printStackTrace();</span>
+<span class="nc" id="L74">		}</span>
+<span class="nc" id="L75">		return result;</span>
+	}
+
+	@Override
+	public int create(User t) {
+<span class="nc" id="L80">		int result = 0;</span>
+<span class="nc" id="L81">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="nc" id="L82">			String sql = &quot;insert into ers_users (ers_username, user_first_name, user_last_name, user_email, user_role_id) values (?,?,?,?,?);&quot;;</span>
+<span class="nc" id="L83">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="nc" id="L84">			ps.setString(1, t.getUsername());</span>
+<span class="nc" id="L85">			ps.setString(2, t.getFirst());</span>
+<span class="nc" id="L86">			ps.setString(3,  t.getLast());</span>
+<span class="nc" id="L87">			ps.setString(4, t.getEmail());</span>
+<span class="nc" id="L88">			ps.setInt(5, t.getRole().getRoleId());</span>
+<span class="nc" id="L89">			result = ps.executeUpdate();</span>
+<span class="nc" id="L90">			ps.close();</span>
+<span class="nc" id="L91">		} catch (SQLException e) {</span>
+<span class="nc" id="L92">			e.printStackTrace();</span>
+<span class="nc" id="L93">		}</span>
+<span class="nc" id="L94">		return result;</span>
+	}
+	
+	
+	public int register(User t, String password) {
+<span class="nc" id="L99">		int result = 0;</span>
+<span class="nc" id="L100">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="nc" id="L101">			String sql = &quot;insert into ers_users (ers_username, user_first_name, user_last_name, user_email, user_role_id, ers_password) values (?,?,?,?,?,?);&quot;;</span>
+<span class="nc" id="L102">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="nc" id="L103">			ps.setString(1, t.getUsername());</span>
+<span class="nc" id="L104">			ps.setString(2, t.getFirst());</span>
+<span class="nc" id="L105">			ps.setString(3,  t.getLast());</span>
+<span class="nc" id="L106">			ps.setString(4, t.getEmail());</span>
+<span class="nc" id="L107">			ps.setInt(5, t.getRole().getRoleId());</span>
+<span class="nc" id="L108">			ps.setString(6,  password);</span>
+<span class="nc" id="L109">			result = ps.executeUpdate();</span>
+<span class="nc" id="L110">			ps.close();</span>
+<span class="nc" id="L111">		} catch (SQLException e) {</span>
+<span class="nc" id="L112">			e.printStackTrace();</span>
+<span class="nc" id="L113">		}</span>
+<span class="nc" id="L114">		return result;</span>
+	}
+
+	@Override
+	public int delete(Integer i) {
+<span class="nc" id="L119">		int result = 0;</span>
+<span class="nc" id="L120">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="nc" id="L121">			String sql = &quot;delete from ers_users where ers_users_id = ?;&quot;;</span>
+<span class="nc" id="L122">			PreparedStatement ps = con.prepareStatement(sql);</span>
+<span class="nc" id="L123">			ps.setInt(1, i);</span>
+<span class="nc" id="L124">			result = ps.executeUpdate();</span>
+<span class="nc" id="L125">			ps.close();</span>
+<span class="nc" id="L126">		} catch (SQLException e) {</span>
+<span class="nc" id="L127">			e.printStackTrace();</span>
+<span class="nc" id="L128">		}</span>
+<span class="nc" id="L129">		return result;</span>
+	}
+	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return userid  or 0 if unsuccessful login
+	 */
+	public int login(String username, String password) {
+<span class="fc" id="L139">		int result = 0;</span>
+<span class="fc" id="L140">		try(Connection con = EnvironmentConnectionUtil.getInstance().getConnection()){</span>
+<span class="fc" id="L141">			String sql = &quot;call login(?,?,0)&quot;;</span>
+<span class="fc" id="L142">			CallableStatement cs = con.prepareCall(sql);</span>
+<span class="fc" id="L143">			cs.setString(1,  username);</span>
+<span class="fc" id="L144">			cs.setString(2,  password);</span>
+<span class="fc" id="L145">			ResultSet rs = cs.executeQuery();</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">			if(rs.next()) {</span>
+<span class="fc" id="L147">				result = rs.getInt(1);</span>
+			}
+<span class="fc" id="L149">			rs.close();</span>
+<span class="fc" id="L150">			cs.close();</span>
+<span class="nc" id="L151">		} catch (SQLException e) {</span>
+<span class="nc" id="L152">			e.printStackTrace();</span>
+<span class="fc" id="L153">		}</span>
+<span class="fc" id="L154">		return result;</span>
+	}
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

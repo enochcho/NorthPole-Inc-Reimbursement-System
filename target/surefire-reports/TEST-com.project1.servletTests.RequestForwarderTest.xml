@@ -63,13 +63,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testRoutesLogin" time="0.048"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataEmpl" time="0.003"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataAprvDeny" time="0"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataAdd" time="0.002"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataAll" time="0.001"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testRoutesdefault" time="0.002"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testRoutesLogout" time="0.008"/>
-  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataRegister" time="0"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testRoutesLogin" time="0.035"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataEmpl" time="0.001"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataAprvDeny" time="0.002"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataAdd" time="0.009"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataAll" time="0"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testRoutesdefault" time="0"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testRoutesLogout" time="0.015"/>
+  <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testDataRegister" time="0.002"/>
   <testcase classname="com.project1.servletTests.RequestForwarderTest" name="testConstructor" time="0.001"/>
 </testsuite>
