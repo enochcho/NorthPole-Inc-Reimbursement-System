@@ -1,4 +1,4 @@
-North Pole Inc Reimbursement System
+
 # Project Description
   A reimbursement system for Santa and his people. Santa and the reindeer and elves make reimbursement requests from their expenses and Mrs.Claus handles
   the requests by approving or denying them. A user can register as a worker at North Pole Inc and start submitting reimbursement requests. Mrs.Claus has 
