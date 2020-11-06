@@ -23,6 +23,7 @@
   - The filter feature in the application is dynamically changing what appears through the use of DOM manipulation, thus allowing faster loading times
    because the application is not getting the requests from the server everytime. The user can filter by reimbursement status and the financial manager 
    can filter by employee as well. 
+  - The password is hashed in the database. 
   - Two types of users: Employee and Financial Manager
     - Employee:
       - Can view their own reimbursement requests and filter by status(pending, approved, and denied). 
@@ -33,5 +34,16 @@
      - Have pictures of the receipt that can be uploaded by the user and stored in the database to be viewed later.
      - Email notifications when a request is approved or denied.
 # Getting Started
+- git clone https://github.com/enochcho/NorthPole-Inc-Reimbursement-System.git
+- Deploy the application in a Tomcat Server
+- Create a database using the Final Project 1 Setup.sql file, this sets up your database
+- Change the database access information in the EnvironmentConnectionUtil file. 
+- Access the application in a browser
+
+# Usage
+- Create a user/employee
+- Mrs.Claus login information:
+  - username: mrsclaus
+  - password: christmas
 
 
